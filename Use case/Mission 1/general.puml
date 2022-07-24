@@ -1,0 +1,37 @@
+@startuml global gestionnaire de stocks usecase
+
+    left to right direction
+
+    'Create an actor "user"
+    :Utilisateur: as usr
+
+    'application du gestionnaire de stock
+    package "Gestionnaire des stocks"{
+        (Lancer une recherche) as search
+        (Commander des articles) as command
+        (Imprimer un bon de commande) as printBC
+        (Enregistrer une entrée ou une sortie) as recordES
+        (Effectuer un échange inter-site) as exchange
+        (Lire ou modifier les informations d'un article) as rw
+        (Ajouter un article à la base de données) as add
+        (Gérer les fournisseurs) as manageFour
+    }
+
+    'relations
+    usr -> command
+    usr -> recordES
+    usr -> exchange
+    usr -> rw
+    usr --> add
+    usr --> manageFour
+   
+
+    command <.. printBC : <<extends>>
+    command ..> search : <<includes>>
+    recordES ..> search : <<includes>>
+    exchange ..> search : <<includes>>
+    rw ..> search : <<includes>>
+
+
+
+@enduml

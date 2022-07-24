@@ -1,0 +1,20 @@
+@startuml global gestionnaire de stocks usecase
+
+    left to right direction
+
+    'Create an actor "user"
+    :Utilisateur: as usr
+
+    'application du gestionnaire de stock
+    package "Gérer les fournisseurs"{
+        (Ajouter un fournisseur) as addFour
+        (Supprimer un fournisseur) as delFour
+        (Lire les informations / modifier les informations d'un fournisseur) as readFour
+    }
+
+    'relations
+    usr --> addFour
+    usr --> delFour
+    usr --> readFour
+
+@enduml

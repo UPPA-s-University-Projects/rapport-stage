@@ -1,0 +1,41 @@
+@startuml global gestionnaire de stocks usecase
+
+    left to right direction
+
+    'Create an actor "user"
+    :Utilisateur: as usr
+
+    'application du gestionnaire de stock
+    package "Commander des articles"{
+        (Lancer une recherche) as search
+        (Ajouter un article au panier) as addArt
+        (Supprimer un artile du panier) as deleteArt
+        (Sélectionner un article du panier) as selectArt
+        (Modifier la quantité d'un article) as modifyArt
+        (Lancer la commande) as command
+        (Lancer une nouvelle commande) as newCommand
+        (Reprendre une ancienne commande) as continueCommand
+
+        (Imprimer un bon de commande) as printCommand
+    }
+
+    'relations
+    usr --> addArt
+    usr --> deleteArt
+    usr --> modifyArt
+    usr --> command
+    usr --> newCommand
+    usr --> continueCommand
+
+    'usr --> printCommand
+
+
+    addArt ..> search : <<includes>>
+    modifyArt ..> selectArt : <<includes>>
+    command <.. printCommand : <<extends>>
+
+
+
+
+
+@enduml
