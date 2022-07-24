@@ -1,9 +1,0 @@
-@startuml global gestionnaire de stocks usecase
-
-    left to right direction
-
-    :Utilisateur: as usr
-
-    
-
-@enduml
