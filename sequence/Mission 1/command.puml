@@ -1,0 +1,51 @@
+@startuml global gestionnaire de stocks sequence
+
+    
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Menu principal" as mmenu
+    participant "Mémoire \n tempon 1" as temp1
+    participant "Formulaire \n de commande" as frmCommand
+    participant "Feuille Excel \n du panier" as feuilExcelBasket
+    participant "Recherche" as search
+
+
+    activate usr
+    activate mmenu
+
+    usr -> mmenu: Clique sur le \n bouton "Commande"
+    mmenu -> frmCommand: Ouvre le formulaire de commande
+    activate frmCommand
+    frmCommand -> usr: Reprendre la commande?
+    usr -> frmCommand: Réponds
+
+    activate feuilExcelBasket
+    alt Si réponse = non
+        frmCommand -> feuilExcelBasket: Vide le panier
+    else
+        frmCommand <- feuilExcelBasket: Récupère le panier
+    end
+
+    usr -> frmCommand: Remplis les champs de recherche \n et lance la recherche
+    frmCommand -> search: Lance la recherche
+    activate search
+    search -> temp1: Remplis la mémoire
+    deactivate search
+    temp1 -> frmCommand: Ajoute l'article dans le panier
+    frmCommand -> feuilExcelBasket: Ajoute l'article dans la feuille Excel
+
+    usr->frmCommand: Sélectionne un article dans le panier
+    frmCommand->frmCommand: Change les informations de l'article
+    alt Nous voulons commander
+        usr->frmCommand: Remplis le montant à commander
+    else nous voulons supprimer l'article du panier
+        usr->frmCommand: Supprime l'article sélectionne 
+    end
+
+    usr -> frmCommand: Lance la commande
+    frmCommand -> frmCommand: Se ferme
+    deactivate feuilExcelBasket
+
+
+
+@enduml

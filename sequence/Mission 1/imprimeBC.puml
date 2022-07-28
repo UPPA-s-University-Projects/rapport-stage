@@ -1,0 +1,30 @@
+@startuml global gestionnaire de stocks sequence
+
+    
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Menu principal" as mmenu
+    participant "Formulaire du choix du fournisseur" as frmCommand
+    participant "Feuille Excel du panier" as feuilExcelBasket
+    participant "Bon de commande " as bc
+
+    activate usr
+    activate mmenu
+    usr -> mmenu : Clique sur le bouton \n "Imprimer BC"
+    mmenu -> frmCommand : Ouvre le formulaire de choix du fournisseur
+    activate frmCommand
+    usr -> frmCommand: Sélectionne le fournisseur
+    usr -> frmCommand: Clique sur le bouton \n "Valider"
+    frmCommand -> feuilExcelBasket : Recherche séquentielle \n pour les articles du \n fournisseur sélectionné
+    activate feuilExcelBasket
+    frmCommand -> bc : Remplis le bon de commande
+    deactivate feuilExcelBasket
+    activate bc
+    frmCommand -> bc: Affiche le bon de commande
+    frmCommand -> frmCommand: Se ferme
+    
+
+    usr -> bc: Imprime le bon de commande
+    deactivate bc
+
+@enduml
