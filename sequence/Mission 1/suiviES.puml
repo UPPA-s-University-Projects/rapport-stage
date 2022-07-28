@@ -1,0 +1,45 @@
+@startuml global gestionnaire de stocks sequence
+
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Menu principal" as mmenu
+    participant "Fonction \n de recherche" as search
+    participant "Mémoire tempon 1" as temp1
+  
+    participant "Formulaire \n d'enregistrement d'E/S" as frmES
+    participant "Fonction \n d'enregistrement d'E/S" as funcES
+    participant "Feuille Excel \n  de l'archive" as feuilExcel
+    participant "BDD" as bdd
+
+    Activate usr
+    Activate mmenu
+    usr -> mmenu : Clique sur le demande \n "Effectuer une E/S"    
+    mmenu -> search : Lance la recherche
+    activate search
+    ...
+    search -> frmES: Afficher le formulaire
+    activate frmES
+    deactivate search
+    
+
+    frmES <- temp1: Récupère les informations \n d'après le numéro de ligne
+    usr -> frmES: Entre le montant de l'E/S
+    usr -> frmES: confirme si livraison
+    usr -> frmES: confirme enregistrement de l'E/S
+    deactivate frmES
+    frmES -> funcES: Envoie les informations
+    activate funcES
+    
+    activate feuilExcel
+    activate bdd
+    funcES -> feuilExcel: Enregistrement de l'E/S dans l'archive
+    funcES -> bdd: Modifie le stock de l'article selon l'E/S
+    deactivate funcES
+    deactivate bdd
+    deactivate feuilExcel
+    deactivate frmES
+
+
+
+
+@enduml

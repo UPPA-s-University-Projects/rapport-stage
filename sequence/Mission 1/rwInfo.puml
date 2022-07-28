@@ -1,0 +1,48 @@
+@startuml global gestionnaire de stocks sequence
+
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Menu principal" as mmenu
+    participant "Formulaire \n de recherche" as frmRecherche
+    participant "Fonction \n de recherche" as search
+    participant "Mémoire tempon 1" as temp1
+    participant "Formulaire liste \n des articles \n  trouvés" as frmMultipleFound
+    participant "Formulaire des \n informations \n  de l'article" as frmInfo
+
+    Activate usr
+    Activate mmenu
+    usr -> mmenu : Clique sur le bouton \n  "Lire / Modifier les informations"
+    mmenu -> frmRecherche : Ouvre le formulaire \n  de recherche
+    activate frmRecherche
+    frmRecherche -> usr : Dmeande les informations
+    usr -> frmRecherche : Remmpli le formulaire
+    frmRecherche -> search : Envoi les informations \n  à la fonction de recherche 
+    deactivate frmRecherche
+    activate search
+    search -> search: Effetue une \n recherche séquentielle
+    alt L'article corresponds \n  à la recherche
+        search -> temp1: Sauvergade la \n ligne de l'article
+        activate temp1
+        search -> temp1: curseur++
+        deactivate temp1
+        search -> search: nbElementsTrouves++
+    end
+
+    |||
+
+    alt Aucun article trouvé
+        search -> usr: Affiche un \n message d'erreur
+    else plusieurs articles trouvés
+        search -> frmMultipleFound: Ouvre le formulaire
+        Activate frmMultipleFound
+        frmMultipleFound <- temp1: Récupère la liste de la \n  mémoire tempon
+    else 1 article trouvé
+        search -> frmInfo: Ouvre le formulaire
+        deactivate search
+        frmInfo <- temp1: Récupère l'article
+        activate frmInfo
+        frmInfo -> frmInfo: Lis les informations
+        usr -> frmInfo: Lis / modifie les informations
+    end
+
+@enduml

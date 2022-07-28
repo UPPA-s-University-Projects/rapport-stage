@@ -1,0 +1,29 @@
+@startuml global gestionnaire de stocks sequence
+
+    
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Mémoire tempon 1" as temp1
+    participant "Mémoire tempon 2" as temp2
+    participant "Formulaire liste \n des articles \n  trouvés" as frmMultipleFound
+    participant "Formulaire des \n informations \n  de l'article" as frmInfo
+
+
+    [-> temp1: La recherche remplit la mémoire
+    temp1 -> frmMultipleFound: Récupère la liste \n des articles trouvés
+    Activate usr
+    Activate frmMultipleFound
+    frmMultipleFound -> frmMultipleFound: Remplit la liste \n des articles trouvés
+    usr -> frmMultipleFound: Sélectionne un article \n de la liste
+    usr -> frmMultipleFound: Clique sur le bouton \n "Lire les informations"
+    frmMultipleFound -> temp1: Sauvegarde la ligne de \n l'article sélectionné dans la mémoire tempon 2 
+    temp1 -> temp2 : Copie le \n numéro de ligne
+    frmMultipleFound -> frmInfo: Affiche le formulaire
+    activate frmInfo
+    frmInfo <- temp2: Récupère les informations \n d'après le numéro de ligne
+    usr -> frmInfo: Lis/modifie les informations
+    usr -> frmInfo: Ferme le formulaire
+    deactivate frmInfo
+
+
+@enduml
