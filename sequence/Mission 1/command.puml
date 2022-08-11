@@ -4,14 +4,15 @@
     'Create an actor "user"
     actor Utilisateur as usr
     participant "Menu principal" as mmenu
-    participant "Mémoire \n tempon 1" as temp1
     participant "Formulaire \n de commande" as frmCommand
-    participant "Feuille Excel \n du panier" as feuilExcelBasket
     participant "Recherche" as search
+    participant "Mémoire \n tempon 1" as temp1
+    participant "Feuille Excel \n du panier" as feuilExcelBasket
 
 
     activate usr
     activate mmenu
+    activate temp1
 
     usr -> mmenu: Clique sur le \n bouton "Commande"
     mmenu -> frmCommand: Ouvre le formulaire de commande

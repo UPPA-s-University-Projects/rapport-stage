@@ -1,0 +1,31 @@
+@startuml global gestionnaire de stocks sequence
+
+    
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Menu déroulant 1" as md1
+    participant "Interface" as gui
+    participant "Base de données" as bdd
+    participant "Menu déroulant 2" as md2
+
+
+    usr -> md1 : Modifie la sélection
+    Activate usr
+    Activate md1
+    md1 -> gui : Notification du changement
+    deactivate md1
+    Activate gui
+    gui -> bdd : Cherche information dans la bdd
+    activate bdd
+    bdd -> gui : Retourne la tuple correspondante
+    gui -> bdd : Demande le tableau de données correspondante
+    bdd -> gui : Retourne le tableau de données
+    deactivate bdd
+    gui -> md2 : Set le menu déroulant sur le tableau retourné
+    activate md2
+    deactivate gui
+    deactivate md2
+   
+
+
+@enduml

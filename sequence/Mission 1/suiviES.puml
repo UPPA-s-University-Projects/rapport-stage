@@ -4,14 +4,15 @@
     actor Utilisateur as usr
     participant "Menu principal" as mmenu
     participant "Fonction \n de recherche" as search
-    participant "Mémoire tempon 1" as temp1
   
     participant "Formulaire \n d'enregistrement d'E/S" as frmES
     participant "Fonction \n d'enregistrement d'E/S" as funcES
     participant "Feuille Excel \n  de l'archive" as feuilExcel
     participant "BDD" as bdd
+    participant "Mémoire tempon 1" as temp1
 
     Activate usr
+    Activate temp1
     Activate mmenu
     usr -> mmenu : Clique sur le demande \n "Effectuer une E/S"    
     mmenu -> search : Lance la recherche
@@ -38,6 +39,7 @@
     deactivate bdd
     deactivate feuilExcel
     deactivate frmES
+
 
 
 

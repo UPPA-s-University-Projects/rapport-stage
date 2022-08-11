@@ -6,10 +6,11 @@
     participant "Formulaire \n de recherche" as frmRecherche
     participant "Fonction \n de recherche" as search
     participant "Mémoire tempon 1" as temp1
-    participant "Formulaire liste \n des articles \n  trouvés" as frmMultipleFound
     participant "Formulaire des \n informations \n  de l'article" as frmInfo
+    participant "Formulaire liste \n des articles \n  trouvés" as frmMultipleFound
 
     Activate usr
+    Activate temp1
     Activate mmenu
     usr -> mmenu : Clique sur le bouton \n  "Lire / Modifier les informations"
     mmenu -> frmRecherche : Ouvre le formulaire \n  de recherche
@@ -22,9 +23,9 @@
     search -> search: Effetue une \n recherche séquentielle
     alt L'article corresponds \n  à la recherche
         search -> temp1: Sauvergade la \n ligne de l'article
-        activate temp1
+       
         search -> temp1: curseur++
-        deactivate temp1
+        
         search -> search: nbElementsTrouves++
     end
 

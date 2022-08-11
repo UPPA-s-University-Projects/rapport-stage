@@ -1,0 +1,44 @@
+@startuml global gestionnaire de stocks sequence
+
+    
+    'Create an actor "user"
+    actor Utilisateur as usr
+    participant "Suivi des recoupes" as sdr
+    participant "GUI" as gui
+    participant "BDD des OF" as bddOf
+    participant "BDD interne" as bddInterne
+    participant "BDD des recoupes" as bddRecoupe
+
+    usr -> sdr : Clique sur le bouton \n Saisir une demande de recoupe
+    Activate usr
+    activate sdr
+    sdr -> gui : Afficher l'intérface graphique
+    Activate gui
+
+    alt Entrée automatique
+        usr -> gui : Clique sur le bouton \n Remplir Automatiquement
+        gui -> gui : Lance la procédure de saisie automatique
+        gui -> usr : Lance la fenêtre pour la saisie dU N°Of
+        usr -> gui : Rentre le n°OF
+        gui -> usr : Demande le n° de la pièce (scan)
+        usr -> gui : Rentre le n° de pièce (pas obligatoire)
+        gui -> bddOf : Recherche le n° OF dans la BDD
+        activate bddOf
+        gui -> bddInterne : Recherche la pièce dans la BDD
+        activate bddInterne
+        gui -> gui : Rentre les informations dans les champs
+        deactivate bddInterne
+        deactivate bddOf
+    else Entrée manuelle
+        usr -> gui : Rentre les informations à la main
+    end
+
+    usr -> gui : Clique sur le bouton \n Enregistrer
+    gui -> bddRecoupe : Enregistre la demande de recoupe dans la BDD
+    activate bddRecoupe
+    deactivate bddRecoupe
+    deactivate gui
+    deactivate usr
+    deactivate sdr
+
+@enduml

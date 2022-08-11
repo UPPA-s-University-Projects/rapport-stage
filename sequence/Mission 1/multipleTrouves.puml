@@ -3,15 +3,17 @@
     
     'Create an actor "user"
     actor Utilisateur as usr
-    participant "Mémoire tempon 1" as temp1
-    participant "Mémoire tempon 2" as temp2
     participant "Formulaire liste \n des articles \n  trouvés" as frmMultipleFound
     participant "Formulaire des \n informations \n  de l'article" as frmInfo
+    participant "Mémoire tempon 1" as temp1
+    participant "Mémoire tempon 2" as temp2
 
 
+    Activate temp1
+    Activate temp2
+    Activate usr
     [-> temp1: La recherche remplit la mémoire
     temp1 -> frmMultipleFound: Récupère la liste \n des articles trouvés
-    Activate usr
     Activate frmMultipleFound
     frmMultipleFound -> frmMultipleFound: Remplit la liste \n des articles trouvés
     usr -> frmMultipleFound: Sélectionne un article \n de la liste

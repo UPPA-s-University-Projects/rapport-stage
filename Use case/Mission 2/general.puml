@@ -1,0 +1,39 @@
+@startuml global gestionnaire de stocks usecase
+
+    left to right direction
+
+    'Create an actor "user"
+    :Utilisateur: as usr
+    :Coupe: as coupe
+    :Métodes: as method
+
+    'application du gestionnaire de stock
+    package "Suivi des recoupes"{
+        (Déclarer un OF en recoupe) as declare
+        (Rechercher une recoupe par son n° d'OF) as searchOF
+        (Rechercher une recoupe par son identifiant) as searchID
+        (Modifier une recoupe) as modify
+        (Valider l'OF en recoupe) as grant
+        (Refuser l'OF en recoupe) as deny
+        (Renseigner les informations sur la coupe) as infoCoupe   
+    }
+
+    'relations
+    usr --> declare
+    usr --> modify
+    usr --> searchOF
+    usr --> searchID
+
+    'TODO: vérifier l'héritage des utilisateurs
+    'Declare coupe as a child of usr
+    coupe --> infoCoupe
+    coupe --> modify
+
+    'Declare method as a child of usr
+    method --> grant
+    method --> deny
+
+
+
+
+@enduml
