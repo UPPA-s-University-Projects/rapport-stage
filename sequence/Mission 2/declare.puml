@@ -18,8 +18,8 @@
     alt Entrée automatique
         usr -> gui : Clique sur le bouton \n Remplir Automatiquement
         gui -> gui : Lance la procédure de saisie automatique
-        gui -> usr : Lance la fenêtre pour la saisie dU N°Of
-        usr -> gui : Rentre le n°OF
+        gui -> usr : Lance la fenêtre pour la saisie du N°Of
+        usr -> gui : Rentre le n°OF (scan)
         gui -> usr : Demande le n° de la pièce (scan)
         usr -> gui : Rentre le n° de pièce (pas obligatoire)
         gui -> bddOf : Recherche le n° OF dans la BDD
